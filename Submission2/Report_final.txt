@@ -1,0 +1,29 @@
+
+Report on Optimizing Instruction Per Cycle (IPC) Through Dynamic Cache Remapping
+
+Introduction:
+
+In the relentless pursuit of maximizing the efficiency of modern computing systems, optimizing the Instructions Per Cycle (IPC) stands as a paramount goal. To achieve this, a novel approach to cache management has been developed, centered around dynamic remapping of cache sets. By intelligently categorizing cache sets based on access patterns and dynamically adjusting their mappings, we aim to significantly enhance IPC by optimizing Last Level Cache (LLC) utilization.
+
+Methodology:
+
+Set Classification:
+Cache sets are meticulously classified into five distinct categories: very hot, hot, cold, very cold, and normal.
+The classification hinges on a comprehensive analysis of hit and miss rates within each cache set, utilizing statistical techniques to gauge their variance.
+
+Remapping Strategy:
+The remapping strategy is meticulously designed to prioritize access to frequently accessed data while judiciously managing cache resources.
+Priority is accorded to mapping very hot sets, swiftly followed by the allocation of hot sets to the very cold category.
+Any remaining hot sets are intelligently mapped to cold sets, ensuring optimal cache utilization.
+
+Global Access Counter:
+A sophisticated global access counter is employed to trigger the remapping process, seamlessly adapting to changing access patterns.
+By establishing a predefined threshold value, the remapping process is initiated at strategic intervals, ensuring responsiveness to dynamic workload characteristics.
+
+Key Enhancements:
+Refinement of check_hit() Function (cache.cc):
+The check_hit() function undergoes significant augmentation to seamlessly integrate set type information stored in the set_access array.
+This enhancement facilitates intelligent decision-making during cache access, efficiently directing queries to the appropriate cache set based on its assigned numerical value.
+Advancements in llc_find_victim() Function (srrip.llc_repl):
+The llc_find_victim() function is enhanced to incorporate sophisticated victim selection logic, leveraging set type information.
+This enhancement ensures judicious victim selection, accounting for both the original cache set and its dynamically remapped counterpart.
